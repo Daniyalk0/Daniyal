@@ -7,14 +7,14 @@ import { ArrowUpRight, Copy, Check,MapPin, Mail } from "lucide-react";
 /**
  * UTILS & CONSTANTS
  */
-const EMAIL = "hello@daniyal.dev";
+const EMAIL = "getdaniyalkhan@gmail.com";
 const SOCIAL_LINKS = [
 //   { name: "GitHub", href: "https://github.com", icon: Github },
 //   { name: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
   { name: "Location", value: "London, UK", icon: MapPin },
 ];
 
-const transition = { duration: 0.8, ease: [0.76, 0, 0.24, 1] };
+const transition = { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const };
 
 /**
  * COMPONENTS

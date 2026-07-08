@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight, Mail } from "lucide-react";
-import { VintageSection, VintageWrapper } from "./VintageWrapper";
+// import { VintageSection, VintageWrapper } from "./VintageWrapper";
 import PremiumHeroStack from "./HeroStack";
 import InteractiveHeroMedia from "./HeroStack";
 import DepthStackHero from "./HeroStack";
