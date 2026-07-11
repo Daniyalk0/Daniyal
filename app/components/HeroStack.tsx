@@ -75,10 +75,10 @@ export default function DepthStackHero() {
       style={{ perspective: "1200px" }}
     >
       {/* 1. Corner Accents - They glisten sequentially to guide the eye */}
-      <CornerAccent rotation={0} className="top-0 left-0" />
-      <CornerAccent rotation={90} className="top-0 right-0" />
-      <CornerAccent rotation={180} className="bottom-0 right-0" />
-      <CornerAccent rotation={270} className="bottom-0 left-0" />
+      <CornerAccent rotation={0} className="top-0 left-0" delayGroup="bottom"/>
+      <CornerAccent rotation={90} className="top-0 right-0" delayGroup="bottom" />
+      <CornerAccent rotation={180} className="bottom-0 right-0" delayGroup="top" />
+      <CornerAccent rotation={270} className="bottom-0 left-0" delayGroup="top" />
 
       {/* 2. Visual Preview Label */}
       <span className="absolute top-8 left-8 z-50 text-[10px] hidden lg:block font-black tracking-[0.8em] text-neutral-400 dark:text-neutral-700 uppercase pointer-events-none">

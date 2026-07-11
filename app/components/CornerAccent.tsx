@@ -1,49 +1,42 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import React from "react";
+import { motion } from "motion/react";
 
 type CornerAccentProps = {
   className?: string;
-  /** 0: Top-Left, 90: Top-Right, 180: Bottom-Right, 270: Bottom-Left */
   rotation?: number;
   size?: number;
+  duration?: number; // Total time for the whole sequence (Top + Bottom)
+  delayGroup?: "top" | "bottom"; 
+  color?: string;
 };
 
-/**
- * Premium Stationary Corner Accent
- * - Faded ends via SVG masking.
- * - Simultaneous glisten pulse.
- * - Optimized for dark/light mode.
- */
 export default function CornerAccent({
   className = "",
   rotation = 0,
-  size = 120,
+  size = 50,
+  duration = 2,
+  delayGroup = "top",
+  color = "#34d399",
 }: CornerAccentProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
-
   const pathData = `M 0 ${size} L 0 24 Q 0 0 24 0 L ${size} 0`;
-  
-  // Unique IDs for multiple instances on one page
-  const maskId = React.useId();
 
-  const glints = React.useMemo(
-  () =>
-    Array.from({ length: 4 }).map((_, i) => ({
-      id: i,
-      duration: 2.2 + Math.random() * 2,
-      delay: Math.random() * 5,
-      segment: 0.12 + Math.random() * 0.05,
-      start: i * 0.25 + Math.random() * 0.08, // keeps them separated
-    })),
-  []
-);
+  // Define keyframes based on which group this belongs to
+  // If top: [Show, Show, Hide, Hide]
+  // If bottom: [Hide, Hide, Show, Show]
+  const opacityKeyframes = 
+    delayGroup === "top" 
+      ? [0, 1, 1, 0, 0, 0] 
+      : [0, 0, 0, 0, 1, 1, 0];
+
+  const timesKeyframes = 
+    delayGroup === "top"
+      ? [0, 0.1, 0.4, 0.5, 0.51, 1] // Active 0% to 50%
+      : [0, 0.49, 0.5, 0.6, 0.9, 1]; // Active 50% to 100%
 
   return (
     <div
-      ref={ref}
       className={`absolute pointer-events-none z-30 ${className}`}
       style={{
         width: size,
@@ -52,112 +45,33 @@ export default function CornerAccent({
       }}
     >
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} fill="none">
-        <defs>
-          {/* This mask creates the "faded away" effect at the ends of the lines */}
-          <mask id={maskId}>
-            <motion.path
-              d={pathData}
-              stroke="white"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeDasharray="1 0" // Necessary for some browser masking engines
-              style={{
-                // Mask gradient: Black at ends (transparent), white in center (visible)
-                // We use a CSS mask-image fallback approach for the "fade"
-              }}
-            />
-            {/* Linear gradients don't curve, so we use a radial mask or layered gradient */}
-            <linearGradient id={`${maskId}-grad-x`} x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="black" />
-              <stop offset="20%" stopColor="white" />
-              <stop offset="100%" stopColor="white" />
-            </linearGradient>
-            <linearGradient id={`${maskId}-grad-y`} x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="white" />
-              <stop offset="80%" stopColor="white" />
-              <stop offset="100%" stopColor="black" />
-            </linearGradient>
-          </mask>
-        </defs>
-
-        <g style={{ mask: `url(#${maskId})` }}>
-          {/* 1. Stationary Base (Faded slightly more in dark mode) */}
+        <motion.g
+          initial={{ opacity: 0 }}
+          animate={{ opacity: opacityKeyframes }}
+          transition={{
+            duration: duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            times: timesKeyframes,
+          }}
+        >
+          {/* Glow */}
           <path
             d={pathData}
-            stroke="currentColor"
+            stroke={color}
+            strokeWidth="3"
+            strokeLinecap="round"
+            style={{ filter: "blur(4px)", opacity: 0.3 }}
+          />
+          {/* Main Line */}
+          <path
+            d={pathData}
+            stroke={color}
             strokeWidth="1.5"
             strokeLinecap="round"
-            className="text-neutral-400 dark:text-neutral-800 opacity-40 dark:opacity-40"
           />
-
-          {/* 2. Simultaneous Glisten Pulse */}
-        {isInView &&
-  glints.map((g) => (
-    <motion.path
-      key={g.id}
-      d={pathData}
-      stroke="currentColor"
-      strokeWidth="0.9"
-      strokeLinecap="round"
-      className="text-neutral-500 dark:text-white"
-      pathLength={1}
-      initial={{
-        pathLength: g.segment,
-        pathOffset: g.start,
-        opacity: 0,
-      }}
-      animate={{
-        pathOffset: [g.start, g.start + 1],
-       opacity: [
-    0,
-    0.8 + Math.random() * 0.2,
-    0.8 + Math.random() * 0.2,
-    0,
-]
-      }}
-      transition={{
-        duration: g.duration,
-        repeat: Infinity,
-        repeatDelay: Math.random() * 2,
-        delay: g.delay,
-        ease: "linear",
-      }}
-      style={{
-      filter: `drop-shadow(0 0 ${3 + g.id}px rgba(255,255,255,.9))`
-      }}
-    />
-  ))}
-          
-          {/* 3. Outer Bloom (Subtle glow) */}
-          {isInView && (
-            <motion.path
-              d={pathData}
-              stroke="white"
-              strokeWidth="4"
-              strokeLinecap="round"
-              className="opacity-0"
-              animate={{ opacity: [0, 0.4, 0.4, 0] }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                repeatDelay: 5,
-                ease: "easeInOut",
-              }}
-              style={{ filter: "blur(6px)" }}
-            />
-          )}
-        </g>
+        </motion.g>
       </svg>
-      
-      {/* CSS-based Fading for the ends of the stroke */}
-      <style jsx>{`
-        svg {
-          mask-image: linear-gradient(to right, transparent, black 20%), 
-                      linear-gradient(to top, transparent, black 20%);
-          mask-composite: intersect;
-          -webkit-mask-composite: source-in;
-        }
-      `}</style>
     </div>
   );
 }
