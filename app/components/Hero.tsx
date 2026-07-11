@@ -141,11 +141,11 @@ export default function HeroSection() {
           className="grid grid-cols-1 lg:grid-cols-10 gap-12 lg:gap-0"
         >
           {/* Left Column: Content */}
-          <div className="lg:col-span-6 flex flex-col justify-center md:mb-13 mt-5 md:mt-0">
+          <div className="lg:col-span-6 flex flex-col justify-center md:mb-16 mt-5 md:mt-0">
             {" "}
             <motion.p
               variants={fadeInUp}
-              className="text-xs uppercase tracking-[0.3em] font-medium text-neutral-500 dark:text-neutral-500 mb-8"
+              className="text-xs  hidden sm:block uppercase tracking-[0.3em] font-medium text-neutral-500 dark:text-neutral-500 mb-8"
             >
               {" "}
               Independent Full-Stack Developer{" "}
@@ -184,15 +184,14 @@ export default function HeroSection() {
               {" "}
               <div className="flex gap-6">
                 {" "}
-                <SocialIcon href="#" icon={FaGithub} label="GitHub" />{" "}
-                <SocialIcon href="#" icon={FaLinkedin} label="LinkedIn" />{" "}
-                <SocialIcon href="#" icon={FaEnvelope} label="Email" />{" "}
+                <SocialIcon href="https://github.com/Daniyalk0" icon={FaGithub} label="GitHub" />{" "}
+                <SocialIcon href="https://www.linkedin.com/in/daniyal-k-648107263/" icon={FaLinkedin} label="LinkedIn" />{" "}
+                <SocialIcon href="mailto:getdaniyalkhan@gmail.com" icon={FaEnvelope} label="Email" />{" "}
               </div>{" "}
               <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-800" />{" "}
-              <p className="text-[10px] uppercase tracking-widest text-neutral-400">
-                {" "}
-                Available for projects 2025{" "}
-              </p>{" "}
+             <p className="text-[8px] sm:text-[10px] uppercase tracking-widest text-neutral-400">
+  Available for projects {new Date().getFullYear()}
+</p>
             </motion.div>{" "}
           </div>
 
@@ -204,7 +203,7 @@ export default function HeroSection() {
             <div className="absolute left-0 top-0 w-12 h-px bg-neutral-300 dark:bg-neutral-700" />{" "}
             {/* Top left notch */}
             <div className="absolute left-0 bottom-0 w-px h-full bg-neutral-100 dark:bg-neutral-900 lg:border-l lg:border-dashed border-neutral-300 dark:border-neutral-800" />
-            <motion.div variants={fadeInUp} className="relative py-8 lg:py-10">
+            <motion.div variants={fadeInUp} className="relative py-5 lg:py-10">
               <span className="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest block mb-6">
                 01 — Featured Project
               </span>
@@ -223,6 +222,8 @@ export default function HeroSection() {
                     "Database Integration",
                     "Product Management",
                     "Responsive Design",
+                    "Smooth Checkout Flow",
+                    "Admin Dashboard",
                   ].map((item) => (
                     <div
                       key={item}

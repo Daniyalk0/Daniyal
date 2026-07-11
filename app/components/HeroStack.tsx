@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useMotionValue, useSpring, useInView, useTransform } from "motion/react";
+import CornerAccent from "./CornerAccent";
 // import { cn } from "@/lib/utils";
 
 // --- Configuration ---
@@ -17,6 +18,7 @@ const PROJECT_LAYERS = [
 ];
 
 export default function DepthStackHero() {
+
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
@@ -39,39 +41,66 @@ export default function DepthStackHero() {
     mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
   };
 
-  return (
+  const cornerVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8,
+  },
+  visible: (delay: number) => ({
+    opacity: [0, 1, 0.5, 1],
+    scale: [0.8, 1.15, 1],
+    filter: [
+      "brightness(1)",
+      "brightness(2.5)",
+      "brightness(1.2)",
+      "brightness(1)",
+    ],
+    transition: {
+      duration: 1,
+      delay,
+      ease: "easeOut",
+    },
+  }),
+};
+
+    return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => { mouseX.set(0); mouseY.set(0); }}
+      onMouseLeave={() => {
+        mouseX.set(0);
+        mouseY.set(0);
+      }}
       className="group mt-12 relative w-full aspect-[4/5] bg-gradient-to-b from-neutral-50 to-neutral-200 dark:from-neutral-900 dark:to-[#050505] border border-neutral-200 dark:border-neutral-800 overflow-hidden flex items-center justify-center rounded-3xl"
       style={{ perspective: "1200px" }}
     >
-      {/* Visual Preview Label */}
-      <span className="absolute top-8 left-8 z-50 text-[10px] font-black tracking-[0.8em] text-neutral-400 dark:text-neutral-600 uppercase pointer-events-none">
+      {/* 1. Corner Accents - They glisten sequentially to guide the eye */}
+      <CornerAccent rotation={0} className="top-0 left-0" />
+      <CornerAccent rotation={90} className="top-0 right-0" />
+      <CornerAccent rotation={180} className="bottom-0 right-0" />
+      <CornerAccent rotation={270} className="bottom-0 left-0" />
+
+      {/* 2. Visual Preview Label */}
+      <span className="absolute top-8 left-8 z-50 text-[10px] hidden lg:block font-black tracking-[0.8em] text-neutral-400 dark:text-neutral-700 uppercase pointer-events-none">
         Visual Preview
       </span>
 
-      {/* 3D Moving Stack */}
-      <motion.div 
+      {/* 3. 3D Moving Stack (Existing) */}
+      <motion.div
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         className="relative w-full h-full flex items-center justify-center"
       >
         {PROJECT_LAYERS.map((layer, index) => (
           <LayerCard 
-            key={layer.id} 
-            layer={layer} 
-            index={index}
-            isInView={isInView} 
-            mouseX={smoothX}
-            mouseY={smoothY}
+             key={layer.id} 
+             layer={layer} 
+             index={index} 
+             isInView={isInView} 
+             mouseX={smoothX} 
+             mouseY={smoothY} 
           />
         ))}
       </motion.div>
-
-      {/* Corner Accents */}
-      <div className="absolute top-6 right-6 w-10 h-10 border-t-2 border-r-2 border-neutral-300 dark:border-neutral-800" />
-      <div className="absolute bottom-6 left-6 w-10 h-10 border-b-2 border-l-2 border-neutral-300 dark:border-neutral-800" />
     </div>
   );
 }
@@ -123,3 +152,6 @@ function LayerCard({ layer, index, isInView, mouseX, mouseY }: any) {
     </motion.div>
   );
 }
+
+
+

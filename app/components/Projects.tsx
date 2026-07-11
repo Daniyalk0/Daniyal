@@ -149,7 +149,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             alt={project.title}
             width={800}
             height={450}
-            className="object-cover grayscale"
+            className="object-cover"
           />
         </div>
       </motion.div>

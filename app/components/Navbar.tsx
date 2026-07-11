@@ -103,8 +103,16 @@ export default function EditorialNavbar() {
     window.removeEventListener("hashchange", updateActiveSection);
 }, []);
 
+useEffect(() => {
+  document.body.style.overflow = isOpen ? "hidden" : "";
+
+  return () => {
+    document.body.style.overflow = "";
+  };
+}, [isOpen]);
 
   return (
+    <>
     <header 
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ease-in-out border-b ${
         scrolled 
@@ -162,6 +170,8 @@ export default function EditorialNavbar() {
       </div>
 
       {/* Full-Screen Editorial Mobile Menu */}
+    
+    </header>
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -215,6 +225,6 @@ export default function EditorialNavbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+      </>
   );
 }
