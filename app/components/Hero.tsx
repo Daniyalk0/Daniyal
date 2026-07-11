@@ -141,7 +141,7 @@ export default function HeroSection() {
           className="grid grid-cols-1 lg:grid-cols-10 gap-12 lg:gap-0"
         >
           {/* Left Column: Content */}
-          <div className="lg:col-span-6 flex flex-col justify-center md:mb-16 mt-5 md:mt-0">
+          <div className="lg:col-span-6 flex flex-col justify-center sm:mb-16 mt-16 sm:mt-0">
             {" "}
             <motion.p
               variants={fadeInUp}

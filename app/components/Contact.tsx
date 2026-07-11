@@ -61,8 +61,8 @@ const ContactItem = ({
         <span className="text-[10px] uppercase tracking-[0.2em] text-stone-400 dark:text-stone-500 font-medium">
           {label}
         </span>
-        <span className="text-lg md:text-xl font-serif text-stone-800 dark:text-stone-200 group-hover:translate-x-2 transition-transform duration-500 ease-out flex items-center gap-2">
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-stone-400">
+        <span className="text-md md:text-xl font-serif text-stone-800 dark:text-stone-200 group-hover:translate-x-2 transition-transform duration-500 ease-out flex items-center gap-2">
+          <span className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-stone-400">
             ✦
           </span>
           {value}
@@ -73,10 +73,10 @@ const ContactItem = ({
         <button
           onClick={handleCopy}
           className="relative cursor-pointer
-           flex items-center justify-center w-10 h-10 rounded-full border border-stone-200 dark:border-stone-800 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all duration-300"
+           flex items-center justify-center mt-5 w-7 h-7 sm:w-10 sm:h-10 rounded-full border-none sm:border border-stone-200 dark:border-stone-800 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all duration-300"
           aria-label="Copy email"
         >
-          <div className="relative w-4 h-4">
+          <div className="relative w-3 h-3 sm:w-4 sm:h-4">
             <AnimatePresence mode="wait" initial={false}>
               {copied ? (
                 <motion.div
@@ -110,9 +110,9 @@ const ContactItem = ({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-10 h-10 flex items-center justify-center rounded-full border border-stone-200 dark:border-stone-800 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all duration-300"
+            className="w-7 h-7 mt-4 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-stone-200 dark:border-stone-800 hover:bg-stone-100 dark:hover:bg-stone-900 transition-all duration-300"
           >
-            <ArrowUpRight className="w-4 h-4 text-stone-400" />
+            <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 text-stone-400" />
           </a>
         )
       )}
@@ -143,7 +143,7 @@ export default function Contact() {
               viewport={{ once: true }}
               transition={transition}
             >
-              <h2 className="text-6xl  lg:text-[9rem] font-serif leading-[0.9] text-stone-900 dark:text-stone-50 transition-colors duration-500">
+              <h2 className="text-[3.5rem]  lg:text-[9rem] font-serif leading-[0.9] text-stone-900 dark:text-stone-50 transition-colors duration-500">
                 Let&apos;s Build <br />
                 <span className="italic">Something</span> <br />
                 Meaningful.
@@ -188,7 +188,7 @@ export default function Contact() {
                 </h3>
               </div>
 
-              <div className="flex flex-col">
+              <div className="flex flex-col ">
                 <ContactItem label="Primary Email" value={EMAIL} isCopyable />
                 <ContactItem
                   label="LinkedIn"

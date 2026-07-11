@@ -29,6 +29,18 @@ export default function CornerAccent({
   // Unique IDs for multiple instances on one page
   const maskId = React.useId();
 
+  const glints = React.useMemo(
+  () =>
+    Array.from({ length: 4 }).map((_, i) => ({
+      id: i,
+      duration: 2.2 + Math.random() * 2,
+      delay: Math.random() * 5,
+      segment: 0.12 + Math.random() * 0.05,
+      start: i * 0.25 + Math.random() * 0.08, // keeps them separated
+    })),
+  []
+);
+
   return (
     <div
       ref={ref}
@@ -75,30 +87,46 @@ export default function CornerAccent({
             stroke="currentColor"
             strokeWidth="1.5"
             strokeLinecap="round"
-            className="text-neutral-400 dark:text-neutral-800 opacity-40 dark:opacity-20"
+            className="text-neutral-400 dark:text-neutral-800 opacity-40 dark:opacity-40"
           />
 
           {/* 2. Simultaneous Glisten Pulse */}
-          {isInView && (
-            <motion.path
-              d={pathData}
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              className="text-neutral-500 dark:text-neutral-300"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 1, 0] }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                repeatDelay: 5, // Loops every 5 seconds
-                ease: "easeInOut",
-              }}
-              style={{
-                filter: "drop-shadow(0 0 2px rgba(255,255,255,0.8))",
-              }}
-            />
-          )}
+        {isInView &&
+  glints.map((g) => (
+    <motion.path
+      key={g.id}
+      d={pathData}
+      stroke="currentColor"
+      strokeWidth="0.9"
+      strokeLinecap="round"
+      className="text-neutral-500 dark:text-white"
+      pathLength={1}
+      initial={{
+        pathLength: g.segment,
+        pathOffset: g.start,
+        opacity: 0,
+      }}
+      animate={{
+        pathOffset: [g.start, g.start + 1],
+       opacity: [
+    0,
+    0.8 + Math.random() * 0.2,
+    0.8 + Math.random() * 0.2,
+    0,
+]
+      }}
+      transition={{
+        duration: g.duration,
+        repeat: Infinity,
+        repeatDelay: Math.random() * 2,
+        delay: g.delay,
+        ease: "linear",
+      }}
+      style={{
+      filter: `drop-shadow(0 0 ${3 + g.id}px rgba(255,255,255,.9))`
+      }}
+    />
+  ))}
           
           {/* 3. Outer Bloom (Subtle glow) */}
           {isInView && (
