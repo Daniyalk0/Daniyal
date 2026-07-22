@@ -1,4 +1,4 @@
-# 🚀 Daniyal Khan — Modern AI Portfolio
+# 🚀 My Personal AI Powered Portfolio
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -77,20 +77,32 @@ Open http://localhost:3000 to see the result.
 ## 📁 Project Structure
 
 ```text
-├── app/               # Next.js App Router (Pages & API)
-├── components/        # Reusable UI components
-├── data/              # Markdown files for projects and AI context
-├── public/            # Static assets (images, icons)
-├── styles/            # Global CSS and Tailwind config
-└── lib/               # Utility functions and AI logic
-
+├── app/
+│   ├── api/
+│   │   └── chat/          # AI chat API route
+│   ├── components/        # Reusable UI components
+│   │   ├── chatbot/
+│   │   ├── sections/
+│   │   └── ui/
+│   ├── content/           # Markdown knowledge base
+│   │   ├── about.md
+│   │   └── projects/
+│   │       ├── greenova.md
+│   │       ├── writewise-ai.md
+│   │       └── salon-template.md
+│   ├── lib/               # AI logic & utility functions
+│   ├── layout.tsx
+│   └── page.tsx
+├── public/                # Static assets
+├── package.json
+└── README.md
 ```
 
 ## 📬 Contact & Socials
 
 I'm always open to discussing new projects, collaborations, or opportunities.
 
-- **GitHub:** https://github.com/Daniyalk0
-- **LinkedIn:** https://www.linkedin.com/in/daniyal-k-648107263/
-- **Email:** getdaniyalkhan@gmail.com
+[![GitHub](https://img.shields.io/badge/GitHub-Daniyalk0-181717?style=for-the-badge&logo=github)](https://github.com/Daniyalk0)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Daniyal%20Khan-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/daniyal-k-648107263/)
+[![Email](https://img.shields.io/badge/Email-Contact-EA4335?style=for-the-badge&logo=gmail)](mailto:getdaniyalkhan@gmail.com)
 <!-- - **X (Twitter):** https://x.com/yourhandle -->
