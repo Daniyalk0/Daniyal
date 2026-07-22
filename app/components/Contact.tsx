@@ -170,14 +170,14 @@ export default function Contact() {
           {/* RIGHT COLUMN: Contact Panel */}
           <div className="lg:col-span-5 flex flex-col">
             <motion.div
-              className="relative p-8 md:p-12 bg-zinc-100 dark:bg-[#141414] border border-stone-200 dark:border-stone-800 shadow-sm rounded-sm"
+              className="relative p-8 md:p-12 bg-[#f8f2e7] dark:bg-[#12100e] border border-[#d6c5a8] dark:border-[#2d261f]  rounded-sm"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ ...transition, delay: 0.2 }}
             >
               {/* Subtle Letterhead Decoration */}
-              <div className="absolute top-0 right-12 w-px h-12 bg-stone-200 dark:bg-stone-800" />
+              <div className="absolute top-0 right-12 w-px h-12 bg-[#ede2ca] dark:bg-[#1a1714]" />
 
               <div className="flex flex-col space-y-2 mb-12">
                 <span className="text-xs uppercase tracking-tighter text-stone-400">

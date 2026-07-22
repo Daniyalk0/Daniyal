@@ -71,7 +71,7 @@ export default function DepthStackHero() {
         mouseX.set(0);
         mouseY.set(0);
       }}
-      className="group mt-12 relative w-full aspect-[4/5] bg-gradient-to-b from-neutral-50 to-neutral-200 dark:from-neutral-900 dark:to-[#050505] border border-neutral-200 dark:border-neutral-800 overflow-hidden flex items-center justify-center rounded-3xl"
+      className="group mt-12 relative w-full aspect-[4/5] bg-gradient-to-b  border border-neutral-200 dark:border-neutral-800 overflow-hidden flex items-center justify-center rounded-3xl"
       style={{ perspective: "1200px" }}
     >
       {/* 1. Corner Accents - They glisten sequentially to guide the eye */}

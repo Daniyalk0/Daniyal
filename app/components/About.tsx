@@ -95,7 +95,7 @@ const sizeClasses = {
       } as any}
       // Responsive Positioning
       className={`absolute top-[var(--top-mob)] left-[var(--left-mob)] lg:top-[var(--top-desk)] lg:left-[var(--left-desk)] 
-        cursor-pointer group bg-white dark:bg-zinc-900 
+        cursor-pointer group bg-[#f8f2e7] dark:bg-[#12100e]  
         p-2 pb-2 lg:p-3 lg:pb-12
         shadow-[0_4px_12px_rgba(0,0,0,0.1),0_15px_35px_-5px_rgba(0,0,0,0.2)]
         hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.4)]

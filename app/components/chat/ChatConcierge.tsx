@@ -183,10 +183,10 @@ export function VintageAssistant({ variant = "desktop-hero" }: Props) {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-[500px] h-[600px] flex flex-col bg-[#f4ead5] dark:bg-[#12100e] shadow-2xl border border-[#d6c5a8] dark:border-[#2d261f] overflow-hidden pointer-events-auto"
+            className="relative w-full max-w-[500px] h-[600px] flex flex-col bg-[#f8f2e7] dark:bg-[#12100e] shadow-2xl border border-[#d6c5a8] dark:border-[#2d261f] overflow-hidden pointer-events-auto"
           >
             {/* Header */}
-            <div className="p-4 border-b border-[#d6c5a8] dark:border-[#2d261f] flex justify-between items-center bg-[#ede2ca] dark:bg-[#1a1714]">
+            <div className="p-4 border-b border-[#d6c5a8] dark:border-[#2d261f] flex justify-between items-center bg-[#f3ebda] dark:bg-[#1a1714]">
               <div className="flex items-center gap-3">
                 <History
                   size={14}
@@ -426,20 +426,86 @@ export function VintageAssistant({ variant = "desktop-hero" }: Props) {
       </>
     );
   }
+const [isExpanded, setIsExpanded] = useState(true);
 
-  return (
-    <>
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ rotate: 15 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(true)}
-        className="flex lg:hidden fixed bottom-6 right-6 z-[200] w-14 h-14 bg-[#f4ead5] dark:bg-[#1a1612] border border-[#d6c5a8] dark:border-[#3d342b] rounded-full shadow-2xl items-center justify-center"
-      >
-        <Feather size={20} className="text-[#5c4d3c] dark:text-[#a3927e]" />
-      </motion.button>
-      {mounted && createPortal(modalContent, document.body)}
-    </>
-  );
+useEffect(() => {
+  if (isOpen) return;
+
+  const timer = setTimeout(() => {
+    setIsExpanded((prev) => !prev);
+  }, isExpanded ? 5000 : 10000); // 5s open, 10s closed
+
+  return () => clearTimeout(timer);
+}, [isExpanded, isOpen]);
+
+const smoothSpring = { type: "spring", stiffness: 50, damping: 20 } as const;
+
+const [isVisible, setIsVisible] = useState(false);
+
+useEffect(() => {
+  // Delay the initial appearance by 3 seconds
+  const timer = setTimeout(() => {
+    setIsVisible(true);
+  }, 3000); 
+
+  return () => clearTimeout(timer);
+}, []);
+
+return (
+  <>
+    <AnimatePresence>
+      {isVisible && !isOpen && (
+
+        <motion.button
+          // 1. ANCHORING & DIMENSIONS
+          initial={false}
+          animate={{ 
+            width: isExpanded ? "240px" : "56px", // Force absolute width
+          }}
+          transition={smoothSpring}
+          
+          // 2. POSITIONING
+          onClick={() => setIsOpen(true)}
+          className="fixed bottom-6 right-6 z-[200] h-14 
+                     flex flex-row-reverse items-center justify-start
+                     bg-[#f4ead5] dark:bg-[#1a1612]
+                     border border-[#d6c5a8] dark:border-[#3d342b] 
+                     rounded-full shadow-2xl overflow-hidden cursor-pointer"
+        >
+          {/* Paper Texture Overlay */}
+          <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
+
+          {/* ICON: Anchored to the right because of flex-row-reverse */}
+          <div className="w-14 h-14 flex-shrink-0 flex items-center justify-center z-10">
+            <Feather size={20} className="text-[#5c4d3c] dark:text-[#a3927e]" />
+          </div>
+
+          {/* TEXT: Appears to the left of the icon */}
+          <div className="relative flex-1 flex items-center justify-center overflow-hidden h-full">
+            <motion.span
+              initial={false}
+              animate={{ 
+                opacity: isExpanded ? 1 : 0,
+                x: isExpanded ? 0 : 20, // Slide in from the right
+              }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              className="whitespace-nowrap font-serif italic text-[#5c4d3c] dark:text-[#a3927e] text-sm pl-6"
+            >
+              Inscribe your query
+            </motion.span>
+          </div>
+
+          {/* Subtle Shine Reflection */}
+          <motion.div 
+             animate={{ x: isExpanded ? ['-100%', '200%'] : '-100%' }}
+             transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
+             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-1/2 -skew-x-12 pointer-events-none"
+          />
+        </motion.button>
+      )}
+    </AnimatePresence>
+
+    {mounted && createPortal(modalContent, document.body)}
+  </>
+);
 }

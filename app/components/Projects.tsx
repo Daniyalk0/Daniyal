@@ -90,7 +90,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onMouseMove={handleMouseMove}
-        className="  group relative border-t border-neutral-200 dark:border-neutral-800 py-10 lg:py-16 px-1 lg:px-3 flex flex-col lg:flex-row items-start lg:items-center cursor-pointer transition-colors duration-500 hover:bg-neutral-50/50 dark:hover:bg-white/[0.02]"
+        className="  group relative border-t border-neutral-200 dark:border-neutral-800 py-10 lg:py-16 px-1 lg:px-3 flex flex-col lg:flex-row items-start lg:items-center cursor-pointer transition-colors duration-500 hover:bg-[#f6f0e6] dark:hover:bg-[#12100e]"
       >
         {/* 01. ID */}
 

@@ -113,12 +113,24 @@ useEffect(() => {
 
   return (
     <>
-    <header 
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ease-in-out border-b ${
-        scrolled 
-          ? "py-4 bg-[#fffdf1] dark:bg-[#0F0F0F]/95 backdrop-blur-sm border-neutral-200 dark:border-neutral-800" 
-          : "py-8 bg-transparent border-transparent"
-      }`}
+<div className="fixed top-0 left-0 w-full h-[80px] z-[500] overflow-hidden pointer-events-none">
+  
+    <motion.header 
+        initial={{ y: "100%" }} 
+        animate={{ y: 0 }}
+        transition={{
+          delay: 2.2, 
+          // 1. INCREASE DURATION: Try 2.5 for a very slow, elegant reveal
+          duration: 2.5, 
+          // 2. USE A SLOWER EASE: [0.16, 1, 0.3, 1] is a slow "out-quint"
+          ease: [0.16, 1, 0.3, 1], 
+        }}
+        // 3. REMOVED: 'transition-all' and 'duration-700' from className
+        className={`relative w-full pointer-events-auto border-b ${
+          scrolled 
+            ? "py-4 bg-[#f8f2e7] dark:bg-[#12100e]  backdrop-blur-sm border-neutral-200 dark:border-neutral-800" 
+            : "py-8 bg-transparent border-transparent"
+        }`}
     >
       <div className="container mx-auto px-6 max-w-[1400px]">
         <nav className="flex items-center justify-between" role="navigation">
@@ -171,14 +183,15 @@ useEffect(() => {
 
       {/* Full-Screen Editorial Mobile Menu */}
     
-    </header>
+    </motion.header>
+        </div>
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[110] bg-[#FDFCFB] dark:bg-[#0F0F0F] p-8 flex flex-col"
+            className="fixed inset-0 z-[1000] bg-[#f8f2e7] dark:bg-[#12100e]  p-8 flex flex-col"
           >
             <div className="flex justify-between items-center mb-16">
               <div className="font-serif text-2xl italic">Navigation Index</div>
