@@ -9,7 +9,7 @@ A high-performance, editorial-inspired portfolio built with **Next.js 15** (App 
 
 ## 🌐 Live Demo
 
-**Check it out here:** [https://your-portfolio-url.com](https://your-portfolio-url.com)
+**Check it out here:** [https://daniyal.devv.vercel.app](https://daniyal.devv.vercel.app)
 
 ---
 

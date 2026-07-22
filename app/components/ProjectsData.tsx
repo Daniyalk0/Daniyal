@@ -31,7 +31,7 @@ export const PROJECTS: Project[] = [
     description: "An editorial-style platform for a boutique hair studio, featuring complex booking integrations and motion-heavy galleries.",
     image: "/salon.jpg",
     technologies: ["React", "Framer Motion", "Tailwind"],
-    liveUrl: "#",
+    liveUrl: "https://salon-template-pink.vercel.app/",
   },
   {
     id: "03",
@@ -41,7 +41,7 @@ export const PROJECTS: Project[] = [
     description: "WriteWise AI helps you quickly generate clear, engaging, and error-free content for emails, reports, social media, and more.",
     image: "/writewiseAi.jpg",
     technologies: ["Next.js", "Supabase", "PostgreSQL"],
-    liveUrl: "#",
+    liveUrl: "https://writewise-ai.vercel.app/",
     githubUrl: "#",
   },
 ];
