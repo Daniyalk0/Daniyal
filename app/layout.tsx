@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./components/Theme-provider";
+import { VintageAssistant } from "./components/chat/ChatConcierge";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ return (
 
           <main className="flex-1">
             {children}
+             <VintageAssistant variant="mobile-persistent" />
           </main>
 
           {/* Footer goes here */}

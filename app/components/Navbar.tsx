@@ -116,7 +116,7 @@ useEffect(() => {
     <header 
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ease-in-out border-b ${
         scrolled 
-          ? "py-4 bg-[#FDFCFB]/95 dark:bg-[#0F0F0F]/95 backdrop-blur-sm border-neutral-200 dark:border-neutral-800" 
+          ? "py-4 bg-[#fffdf1] dark:bg-[#0F0F0F]/95 backdrop-blur-sm border-neutral-200 dark:border-neutral-800" 
           : "py-8 bg-transparent border-transparent"
       }`}
     >

@@ -133,7 +133,7 @@ export default function Contact() {
       {/* Top Border Line */}
       <div className="w-full h-px bg-stone-200 dark:bg-stone-800" />
 
-      <div className="container mx-auto px-6 py-20 md:py-32 flex-grow">
+      <div className="container mx-auto px-6 py-20 md:py-20 flex-grow">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8">
           {/* LEFT COLUMN: Narrative */}
           <div className="lg:col-span-7 flex flex-col justify-start">

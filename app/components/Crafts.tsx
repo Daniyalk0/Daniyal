@@ -59,7 +59,7 @@ export default function CraftSection() {
       {/* Subtle Paper Texture Overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/p6-dark.png')]" />
 
-      <div className="max-w-screen-xl mx-auto px-6 lg:px-12 py-12 md:py-16 min-h-[260px] lg:max-h-[380px] flex items-center relative z-10">
+      <div className="container mx-auto px-6 lg:px-12 py-12 md:py-16 min-h-[260px] lg:max-h-[380px] flex items-center relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 w-full items-start">
           
           {/* Left: Section Header */}

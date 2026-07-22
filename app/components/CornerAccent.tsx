@@ -16,7 +16,7 @@ export default function CornerAccent({
   className = "",
   rotation = 0,
   size = 50,
-  duration = 2,
+  duration = 4,
   delayGroup = "top",
   color = "#34d399",
 }: CornerAccentProps) {

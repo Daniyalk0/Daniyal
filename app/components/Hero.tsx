@@ -8,6 +8,9 @@ import PremiumHeroStack from "./HeroStack";
 import InteractiveHeroMedia from "./HeroStack";
 import DepthStackHero from "./HeroStack";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa6";
+import Link from "next/link";
+import { ChatButton } from "./chat/ChatButton";
+import { VintageAssistant } from "./chat/ChatConcierge";
 
 // --- Types ---
 interface EditorialButtonProps {
@@ -46,27 +49,49 @@ export const GrainOverlay = () => {
   );
 };
 
+
+
 const EditorialButton = ({
   label,
   secondary = false,
-}: EditorialButtonProps) => (
-  <motion.button
-    whileHover={{ y: -2 }}
-    className={`group relative w-full sm:w-auto px-8 py-3 text-sm border-b-[1px] border-neutral-300 dark:border-neutral-800 border-l-[1px]  font-medium transition-all duration-300 ${
-      secondary
-        ? "text-neutral-600 dark:text-neutral-400"
-        : "bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-neutral-900 shadow-sm"
-    }`}
-  >
-    <span className="relative z-10 flex items-center gap-2">
-      {label}
-      <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300" />
-    </span>
-    {/* {secondary && (
-      <span className="absolute bottom-2 left-8 right-8 h-px bg-neutral-300 dark:bg-neutral-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-    )} */}
-  </motion.button>
-);
+}: EditorialButtonProps) => {
+  const href = secondary ? "mailto:getdaniyalkhan@gmail.com" : "/#work";
+
+  const className = `group relative inline-flex w-full sm:w-auto px-8 py-3 text-sm border-b border-l border-neutral-300 dark:border-neutral-800 font-medium transition-all duration-300 ${
+    secondary
+      ? "text-neutral-600 dark:text-neutral-400"
+      : "bg-neutral-900 text-neutral-50 dark:bg-neutral-100 dark:text-neutral-900 shadow-sm"
+  }`;
+
+  if (secondary) {
+    return (
+      <motion.a
+        href={href}
+        whileHover={{ y: -2 }}
+        className={className}
+      >
+        <span className="relative z-10 flex items-center gap-2">
+          {label}
+          <ArrowUpRight className="h-3.5 w-3.5 opacity-0 -translate-y-1 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100" />
+        </span>
+      </motion.a>
+    );
+  }
+
+  return (
+    <Link href={href}>
+      <motion.span
+        whileHover={{ y: -2 }}
+        className={className}
+      >
+        <span className="relative z-10 flex items-center gap-2">
+          {label}
+          <ArrowUpRight className="h-3.5 w-3.5 opacity-0 -translate-y-1 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100" />
+        </span>
+      </motion.span>
+    </Link>
+  );
+};
 
 const SocialIcon = ({
   icon: Icon,
@@ -140,16 +165,18 @@ export default function HeroSection() {
           variants={stagger}
           className="grid grid-cols-1 lg:grid-cols-10 gap-12 lg:gap-0"
         >
+          {/* <ChatButton/> */}
           {/* Left Column: Content */}
-          <div className="lg:col-span-6 flex flex-col justify-center sm:mb-16 mt-16 sm:mt-0">
+          <div className="lg:col-span-6 flex flex-col justify-center sm:mb-16 mt-16  sm:mt-16 lg:mt-0 lg:-translate-y-[9vh]">
+            <VintageAssistant variant="desktop-hero" />
             {" "}
-            <motion.p
+            {/* <motion.p
               variants={fadeInUp}
               className="text-xs  hidden sm:block uppercase tracking-[0.3em] font-medium text-neutral-500 dark:text-neutral-500 mb-8"
             >
               {" "}
               Independent Full-Stack Developer{" "}
-            </motion.p>{" "}
+            </motion.p>{" "} */}
             <motion.h1
               variants={fadeInUp}
               className="text-[clamp(2.5rem,8vw,5.5rem)] leading-[1.05] font-serif mb-10 max-w-4xl tracking-tight"
