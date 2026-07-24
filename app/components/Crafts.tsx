@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'motion/react';
 import { Sparkle } from 'lucide-react';
+import { MaskedReveal } from '@/components/ui/Masked-reveal';
+import { TextReveal } from '@/components/ui/Text-reveal';
 
 // --- Types ---
 
@@ -64,26 +66,32 @@ export default function CraftSection() {
           
           {/* Left: Section Header */}
           <motion.div 
+
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="lg:col-span-3 space-y-1"
           >
-            <h2 className="text-2xl md:text-3xl font-serif italic text-zinc-900 dark:text-zinc-100">
+            <MaskedReveal delay={0.4} duration={1.5} direction="up">
+
+            <h2 className="text-2xl md:text-3xl font-serif italic text-[#2a231b] dark:text-[#d6caba]">
               Craft
             </h2>
-            <p className="text-xs uppercase tracking-[0.2em] font-sans text-zinc-400">
+            </MaskedReveal>
+             <TextReveal className="text-xs uppercase tracking-[0.2em] font-sans text-[#82786e]" text="The tools behind the work." />
+            {/* <p className="text-xs uppercase tracking-[0.2em] font-sans text-[#82786e]">
               The tools behind the work.
-            </p>
+            </p> */}
           </motion.div>
 
           {/* Center: Technology Groups */}
           <div className="lg:col-span-5 grid grid-cols-1 gap-6">
             {CATEGORIES.map((cat) => (
               <div key={cat} className="space-y-2">
-                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-300 dark:text-zinc-700">
+                <TextReveal className="text-[10px] mb-0 uppercase tracking-[0.3em] font-bold text-zinc-300 dark:text-zinc-700" text={cat} />
+                {/* <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-zinc-300 dark:text-zinc-700">
                   {cat}
-                </span>
+                </span> */}
                 <div className="flex flex-wrap gap-x-4 gap-y-1">
                   {CRAFT_ITEMS.filter(t => t.category === cat).map((tech) => (
                     <TechItem 
@@ -110,15 +118,20 @@ export default function CraftSection() {
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="space-y-3"
                 >
+                  <MaskedReveal delay={0.4} duration={1.2} direction="up">
+
                   <div className="flex items-center gap-2">
-                    <Sparkle className="w-3 h-3 text-zinc-400 fill-zinc-400" />
-                    <h3 className="text-xs font-sans font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                    <Sparkle className="w-3 h-3 text-[#473d32] dark:text-[#d6caba]" />
+
+                    <h3 className="text-xs font-sans font-bold uppercase tracking-widest text-[#473d32] dark:text-[#d6caba]">
                       {activeTech.name}
                     </h3>
                   </div>
-                  <p className="text-base md:text-lg font-serif italic text-zinc-700 dark:text-zinc-300 leading-snug">
+                  </MaskedReveal>
+                  <TextReveal className="text-base md:text-lg font-serif italic text-[#372f26] dark:text-[#b6ab9d] leading-snug" text={activeTech.description} />
+                  {/* <p className="text-base md:text-lg font-serif italic text-[#372f26] dark:text-[#b6ab9d] leading-snug">
                     {activeTech.description}
-                  </p>
+                  </p> */}
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -159,10 +172,12 @@ function TechItem({
           className="absolute -left-4 flex items-center justify-center pointer-events-none"
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
-          <Sparkle className="w-2.5 h-2.5 text-zinc-400 fill-zinc-400" />
+          <Sparkle className="w-2.5 h-2.5 text-[#a89f95] fill-[#a89f95]" />
         </motion.div>
       )}
-
+<TextReveal className={`text-sm md:text-base font-sans transition-colors duration-300 ${isActive ? 'text-[#493f33] dark:text-[#d6caba]' : 'text-[#a7a29cb3]'}`} text={tech.name} />
+      {/* <span
+        className={`text-sm md:text-base font-sans transition-colors duration-300 ${
       <motion.span
         animate={{ 
           y: isActive ? -2 : 0,
@@ -170,7 +185,7 @@ function TechItem({
           fontWeight: isActive ? 500 : 400 
         }}
         className={`text-sm md:text-base font-sans transition-colors duration-300 ${
-          isActive ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
+          isActive ? 'text-[#493f33] dark:text-[#d6caba]' : 'text-[#a89f95]'
         }`}
       >
         {tech.name}

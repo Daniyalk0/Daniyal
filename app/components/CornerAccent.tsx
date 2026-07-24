@@ -1,30 +1,30 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion"; // Changed from 'motion/react' to 'framer-motion' for compatibility, adjust if needed
 
 type CornerAccentProps = {
   className?: string;
   rotation?: number;
   size?: number;
-  duration?: number; // Total time for the whole sequence (Top + Bottom)
-  delayGroup?: "top" | "bottom"; 
-  color?: string;
+  duration?: number;
+  delayGroup?: "top" | "bottom";
+  color?: string; // Defaulting to the vintage bronze/amber color
 };
 
 export default function CornerAccent({
   className = "",
   rotation = 0,
-  size = 50,
+  size = 40, // Slightly smaller default for elegance
   duration = 4,
   delayGroup = "top",
-  color = "#34d399",
+  color = "#8c7b65", // Vintage Bronze/Amber color
 }: CornerAccentProps) {
-  const pathData = `M 0 ${size} L 0 24 Q 0 0 24 0 L ${size} 0`;
+  
+  // RADIUS ADJUSTMENT: Changed the curve points from 24 to 8 for a "rounded-md" look.
+  const radius = 8; 
+  const pathData = `M 0 ${size} L 0 ${radius} Q 0 0 ${radius} 0 L ${size} 0`;
 
-  // Define keyframes based on which group this belongs to
-  // If top: [Show, Show, Hide, Hide]
-  // If bottom: [Hide, Hide, Show, Show]
   const opacityKeyframes = 
     delayGroup === "top" 
       ? [0, 1, 1, 0, 0, 0] 
@@ -32,8 +32,8 @@ export default function CornerAccent({
 
   const timesKeyframes = 
     delayGroup === "top"
-      ? [0, 0.1, 0.4, 0.5, 0.51, 1] // Active 0% to 50%
-      : [0, 0.49, 0.5, 0.6, 0.9, 1]; // Active 50% to 100%
+      ? [0, 0.1, 0.4, 0.5, 0.51, 1] 
+      : [0, 0.49, 0.5, 0.6, 0.9, 1];
 
   return (
     <div
@@ -55,20 +55,22 @@ export default function CornerAccent({
             times: timesKeyframes,
           }}
         >
-          {/* Glow */}
+          {/* Theme-matched Glow: Reduced opacity and adjusted blur for a "paper ember" feel */}
           <path
             d={pathData}
             stroke={color}
             strokeWidth="3"
             strokeLinecap="round"
-            style={{ filter: "blur(4px)", opacity: 0.3 }}
+            style={{ filter: "blur(6px)", opacity: 0.40 }}
           />
-          {/* Main Line */}
+          
+          {/* Main Ink Line */}
           <path
             d={pathData}
             stroke={color}
-            strokeWidth="1.5"
+            strokeWidth="1.2" // Slightly thinner line for a more delicate, vintage look
             strokeLinecap="round"
+            style={{ opacity: 0.8 }}
           />
         </motion.g>
       </svg>

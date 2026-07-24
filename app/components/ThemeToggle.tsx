@@ -17,7 +17,7 @@ export function ThemeToggle({className}: {className?: string}) {
       <div className="hidden md:block">
         <button
           aria-label="Toggle theme"
-          className="p-2 text-neutral-400"
+          className="p-2 text-[#393025] dark:text-[#f9ebdc]"
         >
           <Sun size={18} strokeWidth={1.5} />
         </button>
@@ -34,7 +34,7 @@ export function ThemeToggle({className}: {className?: string}) {
         onClick={() => setTheme(isDark ? "light" : "dark")}
         className={`${className ?? ""}
           p-2
-          text-neutral-500
+          text-[#393025] dark:text-[#f9ebdc]
           hover:text-neutral-900
           dark:hover:text-neutral-100
           transition-all

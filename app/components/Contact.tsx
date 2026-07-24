@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, Copy, Check, MapPin, Mail } from "lucide-react";
+import { MaskedReveal } from "@/components/ui/Masked-reveal";
+import { TextReveal } from "@/components/ui/Text-reveal";
 
 /**
  * UTILS & CONSTANTS
@@ -138,28 +140,37 @@ export default function Contact() {
           {/* LEFT COLUMN: Narrative */}
           <div className="lg:col-span-7 flex flex-col justify-start">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={transition}
+              // initial={{ opacity: 0, y: 40 }}
+              // whileInView={{ opacity: 1, y: 0 }}
+              // viewport={{ once: true }}
+              // transition={transition}
             >
-              <h2 className="text-[3.5rem]  lg:text-[9rem] font-serif leading-[0.9] text-stone-900 dark:text-stone-50 transition-colors duration-500">
-                Let&apos;s Build <br />
-                <span className="italic">Something</span> <br />
-                Meaningful.
-              </h2>
+             <h2 className="text-[3.5rem] lg:text-[9rem] font-serif leading-[0.9] text-[#2a231b] dark:text-[#d6caba] transition-colors duration-500">
+  <MaskedReveal delay={0.1} className=" pb-2 sm:pb-4">
+    <span>Let&apos;s Build</span>
+  </MaskedReveal>
+  
+  <MaskedReveal delay={0.2} className=" pb-2 sm:pb-4">
+    <span className="italic">Something</span>
+  </MaskedReveal>
+  
+  <MaskedReveal delay={0.3} className=" pb-2 sm:pb-4">
+    <span>Meaningful.</span>
+  </MaskedReveal>
+</h2>
 
               <div className="mt-12 max-w-md">
-                <p className="text-lg md:text-xl text-stone-600 dark:text-stone-400 font-light leading-relaxed transition-colors duration-500">
+                {/* <p className="text-lg md:text-xl text-stone-600 dark:text-stone-400 font-light leading-relaxed transition-colors duration-500">
                   I&apos;m currently available for freelance projects, creative
                   collaborations, and full-time opportunities. If you have an
                   idea you&apos;d like to bring to life, I&apos;d love to hear
                   about it.
-                </p>
+                </p> */}
+                <TextReveal className="text-lg md:text-xl text-[#716350] dark:text-[#9f9080] font-light leading-tight sm:leading-normal transition-colors duration-500" text="I&apos;m currently available for freelance projects, creative collaborations, and full-time opportunities. If you have an idea you&apos;d like to bring to life, I&apos;d love to hear about it."/>
 
                 <div className="mt-8 flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs sm:text-sm tracking-widest uppercase text-stone-500 dark:text-stone-500 font-medium">
+                  <span className="text-xs sm:text-sm tracking-widest uppercase text-[#716350] dark:text-[#9f9080] font-medium">
                     Available for new projects — 2026
                   </span>
                 </div>
@@ -231,18 +242,18 @@ export default function Contact() {
       <footer className="w-full px-6 py-6 border-t border-stone-200 dark:border-stone-800">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col items-center md:items-start gap-2">
-            <span className="text-xs tracking-[0.3em] uppercase text-stone-400 font-medium">
+            <span className="text-xs tracking-[0.3em] uppercase text-[#887d6e] dark:text-[#6e6459] font-medium">
               © 2026 Daniyal
             </span>
             <div className="flex items-center gap-1">
-              <span className="text-[10px] text-stone-400 font-serif italic">
+              <span className="text-[10px] text-[#716350] dark:text-[#9f9080] font-serif italic">
                 Handcrafted with care.
               </span>
             </div>
           </div>
 
           <div className="flex flex-col items-center md:items-end gap-1">
-            <span className="text-xs text-stone-500 dark:text-stone-400">
+            <span className="text-xs text-[#b5a287] dark:text-[#6c6256]">
               Designed & Developed by Me.
             </span>
             {/* Minimalist Signature Line */}

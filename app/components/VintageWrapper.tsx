@@ -1,6 +1,6 @@
 export const VintageWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
-    <section className="relative min-h-[95vh] w-full flex flex-col justify-center bg-[#fcf5ea] dark:bg-[#0f0e0d] text-neutral-900 dark:text-[#EAE8E4]  overflow-hidden">
+    <section className="relative min-h-[95vh] w-full flex flex-col justify-center bg-[#fffcf7] dark:bg-[#0f0e0d] text-neutral-900 dark:text-[#EAE8E4]  overflow-hidden">
       
       {/* 1. THE NOISE GENERATOR (SVG Filter) */}
       <svg className="absolute inset-0 h-0 w-0 opacity-0">

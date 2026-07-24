@@ -71,7 +71,8 @@ export default function DepthStackHero() {
         mouseX.set(0);
         mouseY.set(0);
       }}
-      className="group mt-12 relative w-full aspect-[4/5] bg-gradient-to-b  border border-neutral-200 dark:border-neutral-800 overflow-hidden flex items-center justify-center rounded-3xl"
+      className="group mt-4 relative w-full aspect-[4/5] bg-gradient-to-b  border border-[#d6c5a8]/60 dark:border-[#3d342b] 
+                 shadow-[0_10px_30px_rgba(0,0,0,0.03)] overflow-hidden flex items-center justify-center rounded-md"
       style={{ perspective: "1200px" }}
     >
       {/* 1. Corner Accents - They glisten sequentially to guide the eye */}
@@ -81,7 +82,7 @@ export default function DepthStackHero() {
       <CornerAccent rotation={270} className="bottom-0 left-0" delayGroup="top" />
 
       {/* 2. Visual Preview Label */}
-      <span className="absolute top-8 left-8 z-50 text-[10px] hidden lg:block font-black tracking-[0.8em] text-neutral-400 dark:text-neutral-700 uppercase pointer-events-none">
+      <span className="absolute top-8 left-8 z-50 text-[10px] hidden lg:block font-black tracking-[0.8em] text-[#d6c5a8]/60 dark:text-[#3d342b] uppercase pointer-events-none">
         Visual Preview
       </span>
 

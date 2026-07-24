@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { ThemeProvider } from "./components/Theme-provider";
 import { VintageAssistant } from "./components/chat/ChatConcierge";
+import { IntroProvider } from "./context/IntroContext";
+import IntroOverlay from "./components/IntroOverlay";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,13 +36,17 @@ return (
       <body className="min-h-screen flex flex-col">
         <ThemeProvider
         >
+          <IntroProvider>
+
           <Navbar />
 
           <main className="flex-1">
             {children}
-             <VintageAssistant variant="mobile-persistent" />
+            <IntroOverlay/>
+             {/* <VintageAssistant variant="mobile-persistent" /> */}
           </main>
 
+          </IntroProvider>
           {/* Footer goes here */}
           {/* <Footer /> */}
         </ThemeProvider>

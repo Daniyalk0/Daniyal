@@ -1,8 +1,16 @@
 "use client";
 
-import React, { useRef } from 'react';
-import Image from 'next/image';
-import { motion, useScroll, useTransform, useInView , useReducedMotion} from 'motion/react';
+import React, { useRef } from "react";
+import Image from "next/image";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useInView,
+  useReducedMotion,
+} from "motion/react";
+import { MaskedReveal } from "@/components/ui/Masked-reveal";
+import { TextReveal } from "@/components/ui/Text-reveal";
 
 // --- Types ---
 
@@ -78,21 +86,23 @@ const GALLERY_FRAGMENTS: Fragment[] = [
 ];
 
 const PaperFragment = ({ item }: { item: Fragment }) => {
-const sizeClasses = {
-  sm: "w-38 sm:w-32 md:w-52",
-  md: "w-48 sm:w-40 md:w-64",
-  lg: "w-52 sm:w-52 md:w-80",
-};
+  const sizeClasses = {
+    sm: "w-38 sm:w-32 md:w-52",
+    md: "w-48 sm:w-40 md:w-64",
+    lg: "w-52 sm:w-52 md:w-80",
+  };
 
   return (
     <motion.div
-      style={{ 
-        "--top-mob": item.top.mobile,
-        "--left-mob": item.left.mobile,
-        "--top-desk": item.top.desktop,
-        "--left-desk": item.left.desktop,
-        zIndex: item.zIndex 
-      } as any}
+      style={
+        {
+          "--top-mob": item.top.mobile,
+          "--left-mob": item.left.mobile,
+          "--top-desk": item.top.desktop,
+          "--left-desk": item.left.desktop,
+          zIndex: item.zIndex,
+        } as any
+      }
       // Responsive Positioning
       className={`absolute top-[var(--top-mob)] left-[var(--left-mob)] lg:top-[var(--top-desk)] lg:left-[var(--left-desk)] 
         cursor-pointer group bg-[#f8f2e7] dark:bg-[#12100e]  
@@ -100,17 +110,39 @@ const sizeClasses = {
         shadow-[0_4px_12px_rgba(0,0,0,0.1),0_15px_35px_-5px_rgba(0,0,0,0.2)]
         hover:shadow-[0_20px_50px_-10px_rgba(0,0,0,0.4)]
         transition-shadow duration-300 ${sizeClasses[item.size]}`}
-      
       // Card movement: SNAPPY
-      initial={{ opacity: 0, y: 20, rotate: item.rotation }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ 
-        rotate: 0, 
-        scale: 1.02, 
-        zIndex: 50,
-        transition: { duration: 0.2, ease: "easeOut" } // Fast card movement
-      }}
+initial={{ 
+  opacity: 0, 
+  y: 80, 
+  scale: 0.85, 
+  rotate: item.rotation + 12, // Start with a more exaggerated tilt
+  filter: "blur(10px)", // Starts out of focus
+}}
+whileInView={{ 
+  opacity: 1, 
+  y: 0, 
+  scale: 1,
+  rotate: item.rotation, // Settles into the intended tilt
+  filter: "blur(0px)", // Focuses as it lands
+}}
+viewport={{ once: true, margin: "-50px" }} // Trigger slightly before it hits the center
+transition={{
+  type: "spring",
+  stiffness: 30, // Slow, heavy, and premium feel
+  damping: 15,
+  mass: 0.8,
+  // Smooth out the opacity and blur specifically
+  opacity: { duration: 1.2 },
+  filter: { duration: 1 }
+}}
+whileHover={{
+  rotate: 0,
+  scale: 1.05,
+  y: -10, // Physical lift
+  zIndex: 50,
+  transition: { type: "spring", stiffness: 300, damping: 20 },
+}}
+whileTap={{ scale: 0.98 }} // Slight press effect on click
     >
       {/* Visual Detail: Matte Washi Tape */}
       <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-8 bg-white/30 dark:bg-zinc-800/30 backdrop-blur-md border border-white/20 rotate-1 group-hover:-translate-y-1 transition-transform duration-300" />
@@ -118,11 +150,11 @@ const sizeClasses = {
       {/* Image Container */}
       <div className="relative overflow-hidden aspect-[4/5] bg-zinc-100 dark:bg-zinc-800 shadow-[inset_0_0_10px_rgba(0,0,0,0.1)]">
         {/* Continuous Slow Zoom Image */}
-        <motion.div 
+        <motion.div
           className="w-full h-full"
-          whileHover={{ 
+          whileHover={{
             scale: 1.2,
-            transition: { duration: 10, ease: "linear" } // Continues zooming as long as hovered
+            transition: { duration: 10, ease: "linear" }, // Continues zooming as long as hovered
           }}
           transition={{ duration: 0.6, ease: "easeOut" }} // Reset zoom speed
         >
@@ -138,20 +170,18 @@ const sizeClasses = {
         {/* Paper Texture Overlay */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]" />
       </div>
-      
+
       {/* Card Info */}
       <div className="mt-4 flex flex-col items-center">
         <p className="text-[12px] md:text-sm font-serif italic text-zinc-800 dark:text-zinc-200 text-center px-2">
           "{item.caption}"
         </p>
-        
+
         <div className="w-full mt-4 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pt-2 border-t border-zinc-100 dark:border-zinc-800">
           <span className="text-[8px] uppercase tracking-widest text-zinc-400 font-bold">
             {item.location}
           </span>
-          <span className="text-[8px] font-mono text-zinc-400">
-            #{item.id}
-          </span>
+          <span className="text-[8px] font-mono text-zinc-400">#{item.id}</span>
         </div>
       </div>
     </motion.div>
@@ -163,9 +193,9 @@ export default function AboutSection() {
   const isInView = useInView(containerRef, { once: true, amount: 0.2 });
 
   return (
-    <section 
+    <section
       ref={containerRef}
-      id='about'
+      id="about"
       className="relative min-h-screen w-full py-24 overflow-hidden transition-colors duration-700"
     >
       {/* Background Texture Overlay */}
@@ -173,7 +203,6 @@ export default function AboutSection() {
 
       <div className="container mx-auto px-6 lg:px-10 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
           {/* Left Column: Narrative */}
           <div className="lg:col-span-5 space-y-12 group">
             <motion.div
@@ -182,53 +211,85 @@ export default function AboutSection() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <div className="flex flex-col items-end justify-end mb-4">
-
-              <h2 className="text-xs sm:text-sm font-sans font-semibold tracking-[0.3em] uppercase text-zinc-400 mb-2">
-                The person behind the code
-              </h2>
-               <div className="h-[1px] w-20 bg-zinc-300 dark:bg-zinc-800 mt-1 group-hover:w-full transition-all duration-500" />
+                <h2 className="text-xs sm:text-sm font-sans font-semibold tracking-[0.3em] uppercase text-[#82786e] mb-2">
+                  The person behind the code
+                </h2>
+                <div className="h-[1px] w-20 bg-zinc-300 dark:bg-zinc-800 mt-1 group-hover:w-full transition-all duration-500" />
               </div>
-              <h3 className="text-5xl md:text-7xl font-serif italic tracking-tight text-zinc-900 dark:text-zinc-100 ">
-                About
-              </h3>
+              <MaskedReveal delay={0.4} duration={1.5} direction="up">
+                <h3 className="text-5xl md:text-7xl font-serif italic tracking-tight text-[#393025] dark:text-[#f9ebdc] ">
+                  About
+                </h3>
+              </MaskedReveal>
             </motion.div>
 
-            <motion.div 
+            <div
               className="space-y-8 text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              // initial={{ opacity: 0, y: 20 }}
+              // animate={isInView ? { opacity: 1, y: 0 } : {}}
+              // transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-lg md:text-xl font-serif italic text-zinc-800 dark:text-zinc-200 ">
-                Building digital experiences that feel as intentional as a well-bound book.
-              </p>
+              <MaskedReveal delay={0.7} duration={1.3} direction="up">
+                <p className="text-lg md:text-xl font-serif italic text-[#393025] dark:text-[#f9ebdc] ">
+                  Building digital experiences that feel as intentional as a
+                  well-bound book.
+                </p>
+              </MaskedReveal>
 
-              <div className="space-y-6 max-w-md ">
-                <p>
-                  My journey into software wasn’t driven by a love for machines, but a curiosity for how humans interact with complexity. I believe that every line of code is an opportunity to create clarity in a world that is increasingly cluttered.
-                </p>
-                <p>
-                  As a developer, I sit at the intersection of rigid engineering and fluid design. I approach a codebase with the same reverence a carpenter has for wood—respecting the grain, understanding the limits, and aiming for a finish that lasts.
-                </p>
-                <p>
-                  Currently, I’m focused on the nuances of motion and how micro-interactions can transform a static screen into a tactile conversation.
-                </p>
-              </div>
-            </motion.div>
+            <div className="space-y-6 max-w-md text-[#716350] dark:text-[#9f9080] leading-tight">
+<div className="space-y-6 max-w-md text-[#716350] dark:text-[#9f9080] leading-tight">
+  <TextReveal
+    text="I didn't choose software because it was the obvious path—I chose it because I fell in love with creating things from nothing. Every project teaches me something new, and that's what keeps me building."
+    highlight="creating building"
+    highlightClass="dark:text-[#aa957a] text-[#544839] border-b border-[#aa957a] dark:border-[#544839]  font-medium"
+  />
+
+  <TextReveal
+    delay={0.2}
+    text="I enjoy crafting experiences that are both functional and memorable. From polished interfaces and thoughtful animations to clean architecture, I believe the smallest details often make the biggest difference."
+    highlight="functional memorable architecture details"
+    highlightClass="dark:text-[#aa957a] text-[#544839] border-b border-[#aa957a] dark:border-[#544839]  font-medium"
+  />
+
+  <TextReveal
+    delay={0.4}
+    text="Today I'm expanding beyond the frontend by exploring backend engineering, AI, and scalable systems. Away from the keyboard, you'll usually find me playing cricket, travelling, or chasing great photographs."
+    highlight="backend AI scalable cricket photographs"
+    highlightClass="dark:text-[#aa957a] text-[#544839] border-b border-[#aa957a] dark:border-[#544839]  font-medium"
+  />
+</div>
+</div>
+            </div>
 
             {/* Oversized Pull Quote */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative pt-2 md:pt-10"
-            >
-              <span className="absolute -top-4 -left-6 text-8xl font-serif text-zinc-200 dark:text-zinc-800/50 select-none">“</span>
-              <blockquote className="text-3xl md:text-4xl font-serif italic leading-snug text-zinc-800 dark:text-zinc-100 relative z-10">
-                Software should feel as <span className="text-zinc-400">carefully crafted</span> as the experience it creates.
-              </blockquote>
-              <div className="mt-8 w-24 h-[1px] bg-zinc-200 dark:bg-zinc-800" />
-            </motion.div>
+        <div className="relative pt-2 md:pt-10">
+  {/* The Quote Mark - Animate separately so it doesn't get clipped */}
+  <motion.span
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 1, delay: 0.5 }}
+    className="absolute -top-0 -left-8 text-8xl font-serif text-zinc-200 dark:text-zinc-800/50 select-none pointer-events-none"
+  >
+    “
+  </motion.span>
+
+  {/* The Quote Text */}
+  <blockquote className="relative z-10">
+    <TextReveal
+      text="Software should feel as carefully crafted as the experience it creates."
+      highlight="carefully crafted"
+      highlightClass="text-[#aa957a] dark:text-[#544839] "
+      className="text-3xl md:text-4xl font-serif italic leading-tight  text-[#393025] dark:text-[#f9ebdc] "
+      delay={0.2}
+    />
+  </blockquote>
+
+  {/* The Horizontal Line - Masked Reveal works great here */}
+  <MaskedReveal direction="right" delay={1} className="mt-8">
+    <div className="w-24 h-[1px] bg-zinc-200 dark:bg-zinc-800" />
+  </MaskedReveal>
+</div>
           </div>
 
           {/* Right Column: Floating Paper Fragment Gallery */}
@@ -240,7 +301,7 @@ export default function AboutSection() {
               ))}
 
               {/* Decorative Text Elements */}
-              <motion.div 
+              <motion.div
                 className="absolute bottom-10 right-0 text-right hidden md:block"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
@@ -252,13 +313,12 @@ export default function AboutSection() {
               </motion.div>
             </div>
           </div>
-          
         </div>
       </div>
 
       {/* Decorative Section Divider */}
       {/* <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#f5f5f3] dark:from-[#050505] to-transparent pointer-events-none" /> */}
-      
+
       <style jsx global>{`
         .vertical-text {
           writing-mode: vertical-rl;

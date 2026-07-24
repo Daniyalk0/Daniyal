@@ -4,6 +4,11 @@ import { createPortal } from "react-dom";
 import ReactMarkdown from "react-markdown";
 import { Send, Feather, X, History, Sparkles, Copy, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import HeroSearchSection from "./HeroAI";
+import TypewriterHero from "./HeroAI";
+import CompactVintageBot from "./HeroAI";
+import ManuscriptHeroBot from "./HeroAI";
+import ArchiveManuscriptBot from "./HeroAI";
 
 const SUGGESTIONS = [
   { label: "About Me", query: "Tell me about Daniyal." },
@@ -344,168 +349,173 @@ export function VintageAssistant({ variant = "desktop-hero" }: Props) {
     </AnimatePresence>
   );
 
+  // if (variant === "desktop-hero") {
+  //   return (
+  //     <>
+  //       <div className="hidden lg:block absolute left-0 top-1/6 -translate-y-1/2 z-30 pointer-events-none">
+  //         <motion.div
+  //           initial={{ x: -10 }}
+  //           animate={{
+  //             x: [0, 12, 0],
+  //             filter: [
+  //               "sepia(0.2) contrast(1)",
+  //               "sepia(0.4) contrast(1.05)",
+  //               "sepia(0.2) contrast(1)",
+  //             ],
+  //           }}
+  //           transition={{
+  //             duration: 8,
+  //             repeat: Infinity,
+  //             ease: "easeInOut",
+  //           }}
+  //           className="pointer-events-auto group"
+  //         >
+  //           <motion.button
+  //             whileHover={{ width: 550, x: 20 }}
+  //             transition={{ type: "spring", stiffness: 60, damping: 15 }}
+  //             onClick={() => setIsOpen(true)}
+  //             className="flex items-center w-[400px] h-14 
+  //                        bg-gradient-to-r from-[#f4ead566] via-[#f4ead5]/70 to-transparent 
+  //                        dark:from-[#1a16129e] dark:via-[#1a1612]/90 dark:to-transparent 
+  //                        border-y border-[#d6c5a8]/50 dark:border-[#3d342b]/50 
+  //                        backdrop-blur-[2px] relative overflow-hidden group/btn shadow-[15px_10px_40px_rgba(0,0,0,0.03)]"
+  //             style={{
+  //               maskImage:
+  //                 "linear-gradient(to right, black 80%, transparent 100%)",
+  //               WebkitMaskImage:
+  //                 "linear-gradient(to right, black 80%, transparent 100%)",
+  //             }}
+  //           >
+  //             {/* Subtle Paper Grain Texture */}
+  //             <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
+
+  //             <div className="flex items-center w-full px-10 gap-5">
+  //               <motion.div
+  //                 animate={{ rotate: [-5, 5, -5] }}
+  //                 transition={{
+  //                   duration: 4,
+  //                   repeat: Infinity,
+  //                   ease: "easeInOut",
+  //                 }}
+  //               >
+  //                 <Feather
+  //                   size={18}
+  //                   className="text-[#8c7b65] dark:text-[#5c4d3c] opacity-70 group-hover/btn:text-amber-800 transition-colors"
+  //                 />
+  //               </motion.div>
+
+  //               <div className="flex flex-1 items-center gap-2 overflow-hidden">
+  //                 <span className="text-[#3d342b] dark:text-[#d6c5a8] font-serif italic text-base tracking-tight whitespace-nowrap opacity-60 group-hover/btn:opacity-90 transition-opacity">
+  //                   Inscribe your inquiry...
+  //                 </span>
+
+  //                 {/* Blinking Calligraphy Cursor */}
+  //                 <motion.div
+  //                   animate={{ opacity: [0, 1, 0] }}
+  //                   transition={{ duration: 1.5, repeat: Infinity }}
+  //                   className="w-[1.5px] h-5 bg-[#b5a48b] dark:bg-[#3d342b]"
+  //                 />
+  //               </div>
+
+  //               <div className="flex items-center gap-3 ml-auto pr-10 opacity-0 group-hover/btn:opacity-40 transition-all duration-700 transform translate-x-4 group-hover/btn:translate-x-0">
+  //                 <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#8c7b65]">
+  //                   Open
+  //                 </span>
+  //                 <div className="w-1.5 h-[1px] bg-[#8c7b65]" />
+  //               </div>
+  //             </div>
+  //           </motion.button>
+  //         </motion.div>
+  //       </div>
+  //       {mounted && createPortal(modalContent, document.body)}
+  //     </>
+  //   );
+  // }
+
   if (variant === "desktop-hero") {
-    return (
-      <>
-        <div className="hidden lg:block absolute left-0 top-1/6 -translate-y-1/2 z-30 pointer-events-none">
-          <motion.div
-            initial={{ x: -10 }}
-            animate={{
-              x: [0, 12, 0],
-              filter: [
-                "sepia(0.2) contrast(1)",
-                "sepia(0.4) contrast(1.05)",
-                "sepia(0.2) contrast(1)",
-              ],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="pointer-events-auto group"
-          >
-            <motion.button
-              whileHover={{ width: 550, x: 20 }}
-              transition={{ type: "spring", stiffness: 60, damping: 15 }}
-              onClick={() => setIsOpen(true)}
-              className="flex items-center w-[400px] h-14 
-                         bg-gradient-to-r from-[#f4ead566] via-[#f4ead5]/70 to-transparent 
-                         dark:from-[#1a16129e] dark:via-[#1a1612]/90 dark:to-transparent 
-                         border-y border-[#d6c5a8]/50 dark:border-[#3d342b]/50 
-                         backdrop-blur-[2px] relative overflow-hidden group/btn shadow-[15px_10px_40px_rgba(0,0,0,0.03)]"
-              style={{
-                maskImage:
-                  "linear-gradient(to right, black 80%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(to right, black 80%, transparent 100%)",
-              }}
-            >
-              {/* Subtle Paper Grain Texture */}
-              <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
-
-              <div className="flex items-center w-full px-10 gap-5">
-                <motion.div
-                  animate={{ rotate: [-5, 5, -5] }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Feather
-                    size={18}
-                    className="text-[#8c7b65] dark:text-[#5c4d3c] opacity-70 group-hover/btn:text-amber-800 transition-colors"
-                  />
-                </motion.div>
-
-                <div className="flex flex-1 items-center gap-2 overflow-hidden">
-                  <span className="text-[#3d342b] dark:text-[#d6c5a8] font-serif italic text-base tracking-tight whitespace-nowrap opacity-60 group-hover/btn:opacity-90 transition-opacity">
-                    Inscribe your inquiry...
-                  </span>
-
-                  {/* Blinking Calligraphy Cursor */}
-                  <motion.div
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="w-[1.5px] h-5 bg-[#b5a48b] dark:bg-[#3d342b]"
-                  />
-                </div>
-
-                <div className="flex items-center gap-3 ml-auto pr-10 opacity-0 group-hover/btn:opacity-40 transition-all duration-700 transform translate-x-4 group-hover/btn:translate-x-0">
-                  <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-[#8c7b65]">
-                    Open
-                  </span>
-                  <div className="w-1.5 h-[1px] bg-[#8c7b65]" />
-                </div>
-              </div>
-            </motion.button>
-          </motion.div>
-        </div>
-        {mounted && createPortal(modalContent, document.body)}
-      </>
-    );
+    return <ArchiveManuscriptBot setIsOpen={setIsOpen} mounted={mounted} modalContent={modalContent} />;
   }
-const [isExpanded, setIsExpanded] = useState(true);
+  
+// const [isExpanded, setIsExpanded] = useState(true);
 
-useEffect(() => {
-  if (isOpen) return;
+// useEffect(() => {
+//   if (isOpen) return;
 
-  const timer = setTimeout(() => {
-    setIsExpanded((prev) => !prev);
-  }, isExpanded ? 5000 : 10000); // 5s open, 10s closed
+//   const timer = setTimeout(() => {
+//     setIsExpanded((prev) => !prev);
+//   }, isExpanded ? 5000 : 10000); // 5s open, 10s closed
 
-  return () => clearTimeout(timer);
-}, [isExpanded, isOpen]);
+//   return () => clearTimeout(timer);
+// }, [isExpanded, isOpen]);
 
-const smoothSpring = { type: "spring", stiffness: 50, damping: 20 } as const;
+// const smoothSpring = { type: "spring", stiffness: 50, damping: 20 } as const;
 
-const [isVisible, setIsVisible] = useState(false);
+// const [isVisible, setIsVisible] = useState(false);
 
-useEffect(() => {
-  // Delay the initial appearance by 3 seconds
-  const timer = setTimeout(() => {
-    setIsVisible(true);
-  }, 3000); 
+// useEffect(() => {
+//   // Delay the initial appearance by 3 seconds
+//   const timer = setTimeout(() => {
+//     setIsVisible(true);
+//   }, 3000); 
 
-  return () => clearTimeout(timer);
-}, []);
+//   return () => clearTimeout(timer);
+// }, []);
 
-return (
-  <>
-    <AnimatePresence>
-      {isVisible && !isOpen && (
+// return (
+//   <>
+//     <AnimatePresence>
+//       {isVisible && !isOpen && (
 
-        <motion.button
-          // 1. ANCHORING & DIMENSIONS
-          initial={false}
-          animate={{ 
-            width: isExpanded ? "240px" : "56px", // Force absolute width
-          }}
-          transition={smoothSpring}
+//         <motion.button
+//           // 1. ANCHORING & DIMENSIONS
+//           initial={false}
+//           animate={{ 
+//             width: isExpanded ? "240px" : "56px", // Force absolute width
+//           }}
+//           transition={smoothSpring}
           
-          // 2. POSITIONING
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-[200] h-14 
-                     flex flex-row-reverse items-center justify-start
-                     bg-[#f4ead5] dark:bg-[#1a1612]
-                     border border-[#d6c5a8] dark:border-[#3d342b] 
-                     rounded-full shadow-2xl overflow-hidden cursor-pointer"
-        >
-          {/* Paper Texture Overlay */}
-          <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
+//           // 2. POSITIONING
+//           onClick={() => setIsOpen(true)}
+//           className="fixed bottom-6 right-6 z-[200] h-14 
+//                      flex flex-row-reverse items-center justify-start
+//                      bg-[#f4ead5] dark:bg-[#1a1612]
+//                      border border-[#d6c5a8] dark:border-[#3d342b] 
+//                      rounded-full shadow-2xl overflow-hidden cursor-pointer"
+//         >
+//           {/* Paper Texture Overlay */}
+//           <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
 
-          {/* ICON: Anchored to the right because of flex-row-reverse */}
-          <div className="w-14 h-14 flex-shrink-0 flex items-center justify-center z-10">
-            <Feather size={20} className="text-[#5c4d3c] dark:text-[#a3927e]" />
-          </div>
+//           {/* ICON: Anchored to the right because of flex-row-reverse */}
+//           <div className="w-14 h-14 flex-shrink-0 flex items-center justify-center z-10">
+//             <Feather size={20} className="text-[#5c4d3c] dark:text-[#a3927e]" />
+//           </div>
 
-          {/* TEXT: Appears to the left of the icon */}
-          <div className="relative flex-1 flex items-center justify-center overflow-hidden h-full">
-            <motion.span
-              initial={false}
-              animate={{ 
-                opacity: isExpanded ? 1 : 0,
-                x: isExpanded ? 0 : 20, // Slide in from the right
-              }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="whitespace-nowrap font-serif italic text-[#5c4d3c] dark:text-[#a3927e] text-sm pl-6"
-            >
-              Inscribe your query
-            </motion.span>
-          </div>
+//           {/* TEXT: Appears to the left of the icon */}
+//           <div className="relative flex-1 flex items-center justify-center overflow-hidden h-full">
+//             <motion.span
+//               initial={false}
+//               animate={{ 
+//                 opacity: isExpanded ? 1 : 0,
+//                 x: isExpanded ? 0 : 20, // Slide in from the right
+//               }}
+//               transition={{ duration: 0.6, ease: "easeInOut" }}
+//               className="whitespace-nowrap font-serif italic text-[#5c4d3c] dark:text-[#a3927e] text-sm pl-6"
+//             >
+//               Inscribe your query
+//             </motion.span>
+//           </div>
 
-          {/* Subtle Shine Reflection */}
-          <motion.div 
-             animate={{ x: isExpanded ? ['-100%', '200%'] : '-100%' }}
-             transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
-             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-1/2 -skew-x-12 pointer-events-none"
-          />
-        </motion.button>
-      )}
-    </AnimatePresence>
+//           {/* Subtle Shine Reflection */}
+//           <motion.div 
+//              animate={{ x: isExpanded ? ['-100%', '200%'] : '-100%' }}
+//              transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
+//              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-1/2 -skew-x-12 pointer-events-none"
+//           />
+//         </motion.button>
+//       )}
+//     </AnimatePresence>
 
-    {mounted && createPortal(modalContent, document.body)}
-  </>
-);
+//     {mounted && createPortal(modalContent, document.body)}
+//   </>
+// );
 }
