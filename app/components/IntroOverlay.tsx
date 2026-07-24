@@ -21,14 +21,14 @@ const IntroOverlay = () => {
               {/* 2. Use the EXACT same grid as the Hero */}
               {/* <div className="grid grid-cols-1 lg:grid-cols-10"> */}
               {/* 3. Use the EXACT same column span and alignment */}
-              <div className="lg:col-span-6 text-center">
+              <div className="lg:col-span-6 sm:text-center text-left ml-4 sm:ml-0">
                 <motion.div
                   layoutId="header-text"
                   className="inline-block" // Ensures the box only takes up the text space
                 >
                   <h1 className={textStyles}>
                     <DiaTextReveal
-                      className="inline-block whitespace-nowrap"
+                      className="inline-block whitespace-nowrap text-[#393025] dark:text-[#f9ebdc]"
                       colors={customColors}
                       text="Modern Software."
                       delay={0.1}
@@ -36,7 +36,7 @@ const IntroOverlay = () => {
                     <br />
                     <span className="italic opacity-80">
                       <DiaTextReveal
-                        className="inline-block whitespace-nowrap"
+                        className="inline-block whitespace-nowrap text-[#393025] dark:text-[#f9ebdc]"
                         colors={customColors}
                         text="Timeless Design."
                         delay={0.6}

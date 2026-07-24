@@ -163,7 +163,7 @@ export function ProjectRow({ project, index }: { project: any; index: number }) 
           </p> */}
          {/* Tech Stack - Vintage Archive Style */}
 {/* Tech Stack - 1950s Vintage Style */}
-<div className="mt-8 flex flex-wrap gap-3">
+<div className="mt-4 sm:mt-8 flex flex-wrap gap-3">
   {project.technologies.map((tech : any, i: any) => (
     <motion.div
       key={tech}

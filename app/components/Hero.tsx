@@ -66,7 +66,7 @@ const EditorialButton = ({
       whileHover={{ y: -3, scale: 1.015 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 22 }}
-      className={`group relative inline-flex w-full sm:w-auto items-center justify-center overflow-hidden px-8 py-3 text-sm font-medium transition-all duration-500 ${
+      className={`group relative inline-flex w-full sm:w-auto items-center justify-center overflow-hidden px-6 sm:px-8 py-3 text-sm font-medium transition-all duration-500 ${
         secondary
           ? "border-b border-[#d6c5a8] dark:border-[#2d261f] text-[#5c4d3c] dark:text-[#a3927e] hover:bg-[#f7f1e7] dark:hover:bg-[#1b1814]"
           : "bg-neutral-900 text-[#d5c0a8] shadow-lg shadow-black/10 dark:bg-neutral-100 dark:text-[#352d24] dark:shadow-white/5"
@@ -96,11 +96,7 @@ const EditorialButton = ({
   );
 
   return secondary ? (
-    <motion.a
-      href={href}
-      whileHover={{}}
-      className="inline-flex"
-    >
+    <motion.a href={href} whileHover={{}} className="inline-flex">
       {content}
     </motion.a>
   ) : (
@@ -113,9 +109,7 @@ const EditorialButton = ({
       {content}
     </Link>
   );
-}
-
-
+};
 
 const SocialIcon = ({
   icon: Icon,
@@ -285,59 +279,60 @@ export default function HeroSection() {
               )}
             </div>
             {/* REST OF CONTENT: Fades in after the move starts */}
-           <motion.div
+            <motion.div className="max-w-xl space-y-6">
+              {/* Description with TextReveal */}
+              <TextReveal
+                delay={2.1}
+                className="text-lg md:text-xl font-light leading-tight text-[#5c4d3c] dark:text-[#a3927e]"
+                text="I build full-stack web applications using Next.js, TypeScript, and PostgreSQL to solve complex problems through clean code and intentional design."
+              />
 
-  className="max-w-xl space-y-6"
->
+              {/* Buttons and Socials */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 2.1, duration: 1 }}
+              >
+                <div className="flex items-center gap-6 pt-4">
+                  <EditorialButton label="Resume" />
+                  <EditorialButton label="Get In Touch" secondary />
+                </div>
 
-  {/* Description with TextReveal */}
-  <TextReveal 
-  delay={2.1}
-    className="text-lg md:text-xl font-light leading-tight text-[#5c4d3c] dark:text-[#a3927e]" 
-    text="I build full-stack web applications using Next.js, TypeScript, and PostgreSQL to solve complex problems through clean code and intentional design."
-  />
+                {/* Social Links */}
+                <div className="mt-16 flex items-center gap-8 border-t border-[#d6c5a8] dark:border-[#2d261f] pt-8 w-fit">
+                  <div className="flex gap-6">
+                    <SocialIcon
+                      href="https://github.com/Daniyalk0"
+                      icon={FaGithub}
+                      label="GitHub"
+                    />
 
-  {/* Buttons and Socials */}
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 2.1, duration: 1 }}
-  >
-    <div className="flex flex-wrap items-center gap-6 pt-4">
-      <EditorialButton label="Resume" />
-      <EditorialButton label="Get In Touch" secondary />
-    </div>
+                    <SocialIcon
+                      href="https://www.linkedin.com/in/daniyal-k-648107263/"
+                      icon={FaLinkedin}
+                      label="LinkedIn"
+                    />
 
-    {/* Social Links */}
-    <div className="mt-16 flex items-center gap-8 border-t border-[#d6c5a8] dark:border-[#2d261f] pt-8 w-fit">
-      <div className="flex gap-6">
-        <SocialIcon
-  href="https://github.com/Daniyalk0"
-  icon={FaGithub}
-  label="GitHub"
-/>
+                    <SocialIcon
+                      href="mailto:getdaniyalkhan@gmail.com"
+                      icon={FaEnvelope}
+                      label="Email"
+                    />
+                  </div>
+                  <div className="h-0 w-px bg-neutral-300 dark:bg-neutral-800" />
+                  <TextReveal
+                    className="text-[10px]  uppercase tracking-widest text-[#82786e]"
+                    spanClass="!py-0"
+                    delay={0.3}
+                    text={`Available for projects ${new Date().getFullYear()}`}
+                  />
 
-<SocialIcon
-  href="https://www.linkedin.com/in/daniyal-k-648107263/"
-  icon={FaLinkedin}
-  label="LinkedIn"
-/>
-
-<SocialIcon
-  href="mailto:getdaniyalkhan@gmail.com"
-  icon={FaEnvelope}
-  label="Email"
-/>
-      </div>
-      <div className="h-4 w-px bg-neutral-300 dark:bg-neutral-800" />
-      <TextReveal className="text-[10px] uppercase tracking-widest text-[#82786e]" delay={2.1} text={`Available for projects ${new Date().getFullYear()}`} />
- 
-      {/* <p className="text-[10px] uppercase tracking-widest text-[#82786e]">
+                  {/* <p className="text-[10px] uppercase tracking-widest text-[#82786e]">
         Available for projects {new Date().getFullYear()}
       </p> */}
-    </div>
-  </motion.div>
-</motion.div>
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
 
           {/* Right Column: Project Highlight */}
@@ -348,89 +343,101 @@ export default function HeroSection() {
             <div className="absolute left-0 top-0 w-12 h-px bg-neutral-300 dark:bg-neutral-700" />{" "}
             {/* Top left notch */}
             <div className="absolute left-0 bottom-0 w-px h-full bg-neutral-100 dark:bg-neutral-900 lg:border-l lg:border-dashed border-neutral-300 dark:border-neutral-800" />
-  <motion.div variants={fadeInUp} className="relative py-5 lg:py-10">
-  {/* Original Top Label */}
-  <span className="text-[10px] font-bold text-[#82786e] uppercase tracking-widest block mb-6">
+            <motion.div variants={fadeInUp} className="relative py-5 lg:py-10">
+              {/* Original Top Label */}
+              <TextReveal
+                delay={2.1}
+                className="text-[10px] font-bold text-[#82786e] uppercase tracking-widest block mb-6"
+                text="01 — Featured Project"
+              />
+              {/* <span className="text-[10px] font-bold text-[#82786e] uppercase tracking-widest block mb-6">
     01 — Featured Project
-  </span>
+  </span> */}
 
-  <div className="space-y-6">
-    {/* Title using MaskedReveal */}
-    <MaskedReveal delay={2.1} duration={1.2} direction="up">
-      <h2 className="text-4xl md:text-6xl font-serif tracking-tight text-[#2a231b] dark:text-[#d6caba]">
-        Greenova
-      </h2>
-    </MaskedReveal>
+              <div className="space-y-6">
+                {/* Title using MaskedReveal */}
+                <MaskedReveal delay={2.1} duration={1.2} direction="up">
+                  <h2 className="text-4xl md:text-6xl font-serif tracking-tight text-[#2a231b] dark:text-[#d6caba]">
+                    Greenova
+                  </h2>
+                </MaskedReveal>
 
-    {/* Subtitle using TextReveal */}
-    <TextReveal 
-    delay={2.1}
-      className="text-sm font-medium text-[#82786e] uppercase tracking-tighter"
-      text="Full-Stack E-Commerce Platform"
-    />
+                {/* Subtitle using TextReveal */}
+                <TextReveal
+                  delay={2.1}
+                  className="text-sm font-medium text-[#82786e] uppercase tracking-tighter"
+                  text="Full-Stack E-Commerce Platform"
+                />
 
-    {/* The "Letter" Feature Box */}
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 2.1 }}
-      className="relative mt-8 p-6 md:p-8 max-w-xl 
+                {/* The "Letter" Feature Box */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  // transition={{ delay: 0.3 }}
+                  className="relative mt-8 p-6 md:p-8 max-w-xl 
                  bg-[#fdfbf7] dark:bg-[#1a1612]/40 
                  border border-[#d6c5a8]/60 dark:border-[#3d342b] 
                  shadow-[0_10px_30px_rgba(0,0,0,0.03)]"
-    >
-      {/* Paper Texture Overlay */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
-      
-      {/* Corner Decorative Brackets (The "Letter" feel) */}
-      <div className="absolute top-2 left-2 w-3 h-3 border-t border-l border-[#d6c5a8]" />
-      <div className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-[#d6c5a8]" />
+                >
+                  {/* Paper Texture Overlay */}
+                  <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')]" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 relative z-10">
-        {[
-          "Authentication",
-          "Database Integration",
-          "Product Management",
-          "Responsive Design",
-          "Smooth Checkout Flow",
-          "Admin Dashboard",
-        ].map((item, index) => (
-          <motion.div
-            key={item}
-            initial={{ opacity: 0, x: -5 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 2 + index * 0.1 }}
-            className="flex items-center gap-3 text-xs text-[#60584e] dark:text-[#aca296] italic font-serif"
-          >
-            {/* Ink-style bullet */}
-            <div className="w-1 h-1 rounded-full bg-[#8c7b65]/40" />
-            {item}
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
+                  {/* Corner Decorative Brackets (The "Letter" feel) */}
+                  <div className="absolute top-2 left-2 w-3 h-3 border-t border-l border-[#d6c5a8]" />
+                  <div className="absolute bottom-2 right-2 w-3 h-3 border-b border-r border-[#d6c5a8]" />
 
-    {/* Original Case Study Link */}
-    <Link
-      href={`https://github.com/Daniyalk0/Greenova`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group pt-8 cursor-pointer w-fit block"
-    >
-      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-neutral-900 dark:text-white">
-        Read Case Study
-        <motion.span
-          animate={{ x: [0, 4, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, delay: 2.1 }}
-        >
-          →
-        </motion.span>
-      </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-8 relative z-10">
+                    {[
+                      "Authentication",
+                      "Database Integration",
+                      "Product Management",
+                      "Responsive Design",
+                      "Smooth Checkout Flow",
+                      "Admin Dashboard",
+                    ].map((item, index) => (
+                      <motion.div
+                        key={item}
+                        initial={{ opacity: 0, x: -5 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 2.1 + index * 0.1 }}
+                        viewport={{ once: true }}
+                        className="flex items-center gap-3 text-xs text-[#60584e] dark:text-[#aca296] italic font-serif"
+                      >
+                        {/* Ink-style bullet */}
+                        <div className="w-1 h-1 rounded-full bg-[#8c7b65]/40" />
+                        {item}
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
 
-      <div className="h-px w-20 bg-neutral-900 dark:bg-white mt-1 group-hover:w-full transition-all duration-500" />
-    </Link>
-  </div>
-</motion.div>
+                {/* Original Case Study Link */}
+                <Link
+                  href={`https://github.com/Daniyalk0/Greenova`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group pt-8 cursor-pointer w-fit block"
+                >
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-neutral-900 dark:text-white">
+                    Read Case Study
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        delay: 2.1,
+                      }}
+                      viewport={{ once: true }}
+                    >
+                      →
+                    </motion.span>
+                  </div>
+
+                  <div className="h-px w-20 bg-neutral-900 dark:bg-white mt-1 group-hover:w-full transition-all duration-500" />
+                </Link>
+              </div>
+            </motion.div>
             <DepthStackHero />
           </div>
         </div>

@@ -132,7 +132,7 @@ transition={{
   damping: 15,
   mass: 0.8,
   // Smooth out the opacity and blur specifically
-  opacity: { duration: 1.2 },
+  opacity: { duration: 1 },
   filter: { duration: 1 }
 }}
 whileHover={{
@@ -140,7 +140,7 @@ whileHover={{
   scale: 1.05,
   y: -10, // Physical lift
   zIndex: 50,
-  transition: { type: "spring", stiffness: 300, damping: 20 },
+  transition: { type: "spring", stiffness: 200, damping: 20 },
 }}
 whileTap={{ scale: 0.98 }} // Slight press effect on click
     >

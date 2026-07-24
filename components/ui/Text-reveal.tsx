@@ -9,9 +9,10 @@ interface TextRevealProps {
   delay?: number;
   highlight?: string; // The words you want to color differently
   highlightClass?: string;
+  spanClass?: string; // Optional class for the span wrapping each word
 }
 
-export const TextReveal = ({ text, className, delay = 0, highlight, highlightClass }: TextRevealProps) => {
+export const TextReveal = ({ text, className, delay = 0, highlight, highlightClass, spanClass }: TextRevealProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
   const words = text.split(" ");
@@ -23,7 +24,7 @@ export const TextReveal = ({ text, className, delay = 0, highlight, highlightCla
         const isHighlighted = highlight && highlight.includes(word.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g,""));
         
         return (
-          <span key={i} className="relative inline-flex overflow-hidden mr-[0.25em] py-1">
+          <span key={i} className={cn("relative inline-flex overflow-hidden mr-[0.25em] py-1", spanClass)}>
             <motion.span
               initial={{ y: "110%" }}
               animate={isInView ? { y: 0 } : { y: "110%" }}
